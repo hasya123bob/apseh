@@ -9,10 +9,7 @@ app.secret_key = "metalpro-secret-key"
 
 DATA_DIR = "data"
 
-
-# ==============================
 # FUNGSI DATA JSON
-# ==============================
 
 def load_data(filename):
     path = os.path.join(DATA_DIR, filename)
@@ -20,21 +17,16 @@ def load_data(filename):
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
 
-
 def save_data(filename, data):
     path = os.path.join(DATA_DIR, filename)
 
     with open(path, "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
-
 def next_id(data):
     return max([item["id"] for item in data], default=0) + 1
 
-
-# ==============================
 # PERHITUNGAN OEE
-# ==============================
 
 def calculate_oee(production):
     if not production:
@@ -70,10 +62,7 @@ def calculate_oee(production):
         round(oee, 2)
     )
 
-
-# ==============================
 # FORECASTING
-# ==============================
 
 def forecast_demand(sales):
     if len(sales) < 2:
@@ -103,10 +92,7 @@ def forecast_demand(sales):
         for i in range(3)
     ]
 
-
-# ==============================
 # DASHBOARD
-# ==============================
 
 @app.route("/")
 def dashboard():
@@ -143,10 +129,7 @@ def dashboard():
         today=date.today().strftime("%d-%m-%Y")
     )
 
-
-# ==============================
 # INVENTORY
-# ==============================
 
 @app.route("/inventory", methods=["GET", "POST"])
 def inventory():
@@ -174,7 +157,6 @@ def inventory():
         inventory=items
     )
 
-
 @app.route("/inventory/update/<int:item_id>", methods=["POST"])
 def update_inventory(item_id):
     items = load_data("inventory.json")
@@ -190,7 +172,6 @@ def update_inventory(item_id):
 
     return redirect(url_for("inventory"))
 
-
 @app.route("/inventory/delete/<int:item_id>", methods=["POST"])
 def delete_inventory(item_id):
     items = load_data("inventory.json")
@@ -205,10 +186,7 @@ def delete_inventory(item_id):
 
     return redirect(url_for("inventory"))
 
-
-# ==============================
 # DATA MESIN
-# ==============================
 
 @app.route("/machines", methods=["GET", "POST"])
 def machines():
@@ -234,7 +212,6 @@ def machines():
         machines=items
     )
 
-
 @app.route("/machines/status/<int:machine_id>", methods=["POST"])
 def update_machine_status(machine_id):
     items = load_data("machines.json")
@@ -249,10 +226,7 @@ def update_machine_status(machine_id):
 
     return redirect(url_for("machines"))
 
-
-# ==============================
 # PRODUKSI
-# ==============================
 
 @app.route("/production", methods=["GET", "POST"])
 def production():
@@ -318,10 +292,7 @@ def production():
         today=date.today().isoformat()
     )
 
-
-# ==============================
 # ANALISIS PRODUKSI
-# ==============================
 
 @app.route("/analysis")
 def analysis():
