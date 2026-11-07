@@ -1,0 +1,159 @@
+
+{% extends "base.html" %}
+
+{% block title %}Analisis Produksi - MetalPro{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h2>Analisis Produksi</h2>
+    <p>Analisis performa mesin dan perkiraan permintaan produk.</p>
+</div>
+
+<!-- RINGKASAN OEE -->
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <p>Availability</p>
+            <h2>{{ availability }}%</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <p>Performance</p>
+            <h2>{{ performance }}%</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <p>Quality</p>
+            <h2>{{ quality }}%</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-info">
+            <p>Overall Equipment Effectiveness</p>
+            <h2>{{ oee }}%</h2>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- GRAFIK OEE -->
+<div class="panel">
+
+    <div class="panel-header">
+        <h3>Overall Equipment Effectiveness (OEE)</h3>
+        <p>Perbandingan Availability, Performance, dan Quality.</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="oeeChart"></canvas>
+    </div>
+
+</div>
+
+
+<!-- GRAFIK FORECASTING -->
+<div class="panel">
+
+    <div class="panel-header">
+        <h3>Forecasting Permintaan Produk</h3>
+        <p>Perbandingan permintaan aktual dengan hasil peramalan.</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="forecastChart"></canvas>
+    </div>
+
+</div>
+
+
+<!-- DATA PENJUALAN -->
+<div class="panel">
+
+    <div class="panel-header">
+        <h3>Data Penjualan</h3>
+        <p>Riwayat permintaan produk berdasarkan periode.</p>
+    </div>
+
+    <div class="table-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Bulan</th>
+                    <th>Jumlah Permintaan</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in sales %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ item.month }}</td>
+                    <td>{{ item.demand }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">Belum ada data penjualan.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- HASIL FORECASTING -->
+<div class="panel">
+
+    <div class="panel-header">
+        <h3>Hasil Peramalan</h3>
+        <p>Perkiraan permintaan untuk tiga periode berikutnya.</p>
+    </div>
+
+    <div class="forecast-grid">
+
+        {% for item in forecast %}
+        <div class="forecast-card">
+            <p>{{ forecast_labels[loop.index0 + sales|length] }}</p>
+            <h2>{{ item }}</h2>
+            <span>Unit permintaan</span>
+        </div>
+        {% else %}
+        <p>Data peramalan belum tersedia.</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<!-- DATA UNTUK JAVASCRIPT -->
+<script>
+    window.oeeChartData = {
+        labels: ["Availability", "Performance", "Quality"],
+        values: [
+            {{ availability | tojson }},
+            {{ performance | tojson }},
+            {{ quality | tojson }}
+        ]
+    };
+
+    window.forecastChartData = {
+        labels: {{ forecast_labels | tojson }},
+        actual: {{ forecast_values | tojson }},
+        forecast: {{ forecast_line | tojson }}
+    };
+</script>
+
+{% endblock %}

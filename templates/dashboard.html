@@ -1,0 +1,121 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <p>Jenis Bahan</p>
+        <h2>{{ inventory|length }}</h2>
+        <span>Data inventory</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Total Mesin</p>
+        <h2>{{ machines|length }}</h2>
+        <span>Mesin produksi</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Total Produksi</p>
+        <h2>{{ total_actual }}</h2>
+        <span>Unit dihasilkan</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Nilai OEE</p>
+        <h2>{{ oee }}%</h2>
+        <span>Efektivitas keseluruhan</span>
+    </div>
+
+</section>
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <p>Mesin Beroperasi</p>
+        <h2>{{ active_machines }}</h2>
+        <span>Dari {{ machines|length }} mesin</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Stok Rendah</p>
+        <h2>{{ low_stock }}</h2>
+        <span>Bahan perlu diperiksa</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Produk Cacat</p>
+        <h2>{{ total_defects }}</h2>
+        <span>Unit cacat</span>
+    </div>
+
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Grafik Hasil Produksi</h3>
+            <p>Perbandingan hasil produksi setiap pencatatan</p>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="productionChart"></canvas>
+    </div>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Produksi Terbaru</h3>
+            <p>Daftar pencatatan produksi terakhir</p>
+        </div>
+
+        <a href="{{ url_for('production') }}" class="btn">
+            Lihat Produksi
+        </a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Nama Produk</th>
+                    <th>Target</th>
+                    <th>Aktual</th>
+                    <th>Cacat</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in production[-5:]|reverse %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.product }}</td>
+                    <td>{{ item.target }}</td>
+                    <td>{{ item.actual }}</td>
+                    <td>{{ item.defects }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Belum ada data produksi.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.productionChartData = {
+    labels: {{ production|map(attribute='date')|list|tojson }},
+    values: {{ production|map(attribute='actual')|list|tojson }}
+};
+</script>
+{% endblock %}

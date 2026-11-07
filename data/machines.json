@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Laser Cutting",
+        "process": "Pemotongan",
+        "status": "Perawatan"
+    },
+    {
+        "id": 2,
+        "name": "Mesin Bending",
+        "process": "Pembentukan",
+        "status": "Beroperasi"
+    },
+    {
+        "id": 3,
+        "name": "Mesin Drilling",
+        "process": "Pengeboran",
+        "status": "Perawatan"
+    },
+    {
+        "id": 4,
+        "name": "Mesin Welding",
+        "process": "Pengelasan",
+        "status": "Beroperasi"
+    }
+]

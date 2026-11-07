@@ -1,0 +1,47 @@
+
+[
+    {
+        "id": 1,
+        "date": "2026-11-01",
+        "product": "Bracket Baja",
+        "machine_id": 1,
+        "target": 100,
+        "actual": 95,
+        "defects": 5,
+        "planned_time": 8,
+        "downtime": 1
+    },
+    {
+        "id": 2,
+        "date": "2026-11-02",
+        "product": "Pelat Logam",
+        "machine_id": 2,
+        "target": 120,
+        "actual": 110,
+        "defects": 4,
+        "planned_time": 8,
+        "downtime": 0.5
+    },
+    {
+        "id": 3,
+        "date": "2026-11-03",
+        "product": "Poros Baja",
+        "machine_id": 4,
+        "target": 80,
+        "actual": 75,
+        "defects": 3,
+        "planned_time": 8,
+        "downtime": 1
+    },
+    {
+        "id": 4,
+        "date": "2026-11-04",
+        "product": "Dudukan Mesin",
+        "machine_id": 1,
+        "target": 90,
+        "actual": 88,
+        "defects": 2,
+        "planned_time": 8,
+        "downtime": 0.5
+    }
+]

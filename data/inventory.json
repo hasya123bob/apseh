@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Plat Baja",
+        "category": "Bahan Baku",
+        "stock": 500,
+        "unit": "kg",
+        "min_stock": 100
+    },
+    {
+        "id": 2,
+        "name": "Aluminium",
+        "category": "Bahan Baku",
+        "stock": 250,
+        "unit": "kg",
+        "min_stock": 80
+    },
+    {
+        "id": 3,
+        "name": "Besi Hollow",
+        "category": "Bahan Baku",
+        "stock": 78,
+        "unit": "batang",
+        "min_stock": 100
+    },
+    {
+        "id": 4,
+        "name": "Elektroda Las",
+        "category": "Bahan Pendukung",
+        "stock": 150,
+        "unit": "pcs",
+        "min_stock": 50
+    },
+    {
+        "id": 5,
+        "name": "Mata Bor",
+        "category": "Bahan Pendukung",
+        "stock": 30,
+        "unit": "pcs",
+        "min_stock": 20
+    }
+]

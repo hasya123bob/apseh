@@ -1,0 +1,409 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #172554;
+    color: white;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.brand span {
+    color: #38bdf8;
+}
+
+.sidebar-caption {
+    font-size: 10px;
+    color: #94a3b8;
+    letter-spacing: 1.5px;
+    margin-bottom: 35px;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 13px 15px;
+    margin-bottom: 7px;
+    text-decoration: none;
+    color: #cbd5e1;
+    border-radius: 7px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    margin-left: 240px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.topbar h1 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.topbar p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.date-info {
+    background: white;
+    padding: 11px 16px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+/* DASHBOARD CARDS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 21px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.stat-card p {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 13px;
+}
+
+.stat-card h2 {
+    font-size: 27px;
+    margin-bottom: 9px;
+    color: #172554;
+}
+
+.stat-card span {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* PANEL */
+
+.panel {
+    background: white;
+    padding: 23px;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 12px;
+}
+
+.panel-heading h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.panel-heading p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* TABLE */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+
+td {
+    color: #334155;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    background: white;
+    color: #1e293b;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.form-action {
+    display: flex;
+    align-items: end;
+}
+
+/* BUTTON */
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.btn-danger {
+    background: #dc2626;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.btn-small {
+    padding: 8px 10px;
+    margin: 3px 0;
+}
+
+.inline-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.inline-form input,
+.inline-form select {
+    min-width: 85px;
+    width: auto;
+    padding: 7px;
+}
+
+/* STATUS BADGE */
+
+.badge {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.success {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.warning {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ALERT */
+
+.alert {
+    padding: 13px 16px;
+    border-radius: 7px;
+    margin-bottom: 18px;
+    font-size: 13px;
+}
+
+.alert.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* CHART */
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+.info-note {
+    margin-top: 20px;
+    padding: 14px;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 7px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* FORECAST */
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.forecast-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.forecast-card p {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.forecast-card h2 {
+    color: #172554;
+    font-size: 26px;
+}
+
+.forecast-card span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar-footer {
+        margin-top: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .stats-grid,
+    .form-grid,
+    .forecast-grid {
+        grid-template-columns: 1fr;
+    }
+}

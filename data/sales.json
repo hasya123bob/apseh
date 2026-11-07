@@ -1,0 +1,23 @@
+
+[
+    {
+        "month": "Juni",
+        "demand": 280
+    },
+    {
+        "month": "Juli",
+        "demand": 300
+    },
+    {
+        "month": "Agustus",
+        "demand": 320
+    },
+    {
+        "month": "September",
+        "demand": 310
+    },
+    {
+        "month": "Oktober",
+        "demand": 350
+    }
+]

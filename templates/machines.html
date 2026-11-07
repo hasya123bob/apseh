@@ -1,0 +1,116 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Tambah Mesin</h3>
+            <p>Masukkan informasi mesin produksi.</p>
+        </div>
+    </div>
+
+    <form method="POST" class="form-grid">
+
+        <div class="form-group">
+            <label>Nama Mesin</label>
+            <input type="text" name="name"
+                   placeholder="Contoh: Laser Cutting" required>
+        </div>
+
+        <div class="form-group">
+            <label>Proses Produksi</label>
+            <input type="text" name="process"
+                   placeholder="Contoh: Pemotongan" required>
+        </div>
+
+        <div class="form-group">
+            <label>Status Mesin</label>
+            <select name="status">
+                <option value="Beroperasi">Beroperasi</option>
+                <option value="Perawatan">Perawatan</option>
+                <option value="Rusak">Rusak</option>
+            </select>
+        </div>
+
+        <div class="form-action">
+            <button type="submit" class="btn">Tambah Mesin</button>
+        </div>
+
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Daftar Mesin Produksi</h3>
+            <p>Informasi kondisi dan proses setiap mesin.</p>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Mesin</th>
+                    <th>Proses Produksi</th>
+                    <th>Status</th>
+                    <th>Ubah Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for machine in machines %}
+                <tr>
+                    <td>{{ machine.name }}</td>
+                    <td>{{ machine.process }}</td>
+                    <td>
+                        {% if machine.status == "Beroperasi" %}
+                            <span class="badge success">Beroperasi</span>
+                        {% elif machine.status == "Perawatan" %}
+                            <span class="badge warning">Perawatan</span>
+                        {% else %}
+                            <span class="badge danger">Rusak</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('update_machine_status', machine_id=machine.id) }}"
+                              class="inline-form">
+
+                            <select name="status">
+                                <option value="Beroperasi"
+                                    {% if machine.status == "Beroperasi" %}selected{% endif %}>
+                                    Beroperasi
+                                </option>
+
+                                <option value="Perawatan"
+                                    {% if machine.status == "Perawatan" %}selected{% endif %}>
+                                    Perawatan
+                                </option>
+
+                                <option value="Rusak"
+                                    {% if machine.status == "Rusak" %}selected{% endif %}>
+                                    Rusak
+                                </option>
+                            </select>
+
+                            <button type="submit" class="btn btn-small">
+                                Simpan
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">Belum ada data mesin.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}

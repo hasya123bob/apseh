@@ -1,0 +1,124 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Tambah Bahan</h3>
+            <p>Masukkan data bahan baku atau bahan pendukung.</p>
+        </div>
+    </div>
+
+    <form method="POST" class="form-grid">
+
+        <div class="form-group">
+            <label>Nama Bahan</label>
+            <input type="text" name="name" placeholder="Contoh: Plat Baja" required>
+        </div>
+
+        <div class="form-group">
+            <label>Kategori</label>
+            <select name="category" required>
+                <option value="Bahan Baku">Bahan Baku</option>
+                <option value="Bahan Pendukung">Bahan Pendukung</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Jumlah Stok</label>
+            <input type="number" name="stock" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label>Satuan</label>
+            <input type="text" name="unit" placeholder="kg / batang / pcs" required>
+        </div>
+
+        <div class="form-group">
+            <label>Minimal Stok</label>
+            <input type="number" name="min_stock" min="0" required>
+        </div>
+
+        <div class="form-action">
+            <button type="submit" class="btn">Simpan Bahan</button>
+        </div>
+
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Daftar Inventory</h3>
+            <p>Informasi persediaan bahan produksi.</p>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Bahan</th>
+                    <th>Kategori</th>
+                    <th>Stok</th>
+                    <th>Minimal Stok</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in inventory %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.stock }} {{ item.unit }}</td>
+                    <td>{{ item.min_stock }} {{ item.unit }}</td>
+
+                    <td>
+                        {% if item.stock <= item.min_stock %}
+                            <span class="badge warning">Stok Rendah</span>
+                        {% else %}
+                            <span class="badge success">Aman</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('update_inventory', item_id=item.id) }}"
+                              class="inline-form">
+
+                            <input type="number" name="stock"
+                                   value="{{ item.stock }}" min="0" required>
+
+                            <input type="number" name="min_stock"
+                                   value="{{ item.min_stock }}" min="0" required>
+
+                            <button type="submit" class="btn btn-small">
+                                Update
+                            </button>
+                        </form>
+
+                        <form method="POST"
+                              action="{{ url_for('delete_inventory', item_id=item.id) }}"
+                              onsubmit="return confirm('Yakin ingin menghapus bahan ini?')">
+
+                            <button type="submit" class="btn btn-danger btn-small">
+                                Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">Belum ada data inventory.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}

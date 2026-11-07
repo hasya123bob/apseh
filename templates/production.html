@@ -1,0 +1,117 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Input Data Produksi</h3>
+            <p>Catat hasil kegiatan produksi komponen logam.</p>
+        </div>
+    </div>
+
+    <form method="POST" class="form-grid">
+
+        <div class="form-group">
+            <label>Tanggal Produksi</label>
+            <input type="date" name="date" value="{{ today }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Produk</label>
+            <input type="text" name="product"
+                   placeholder="Contoh: Bracket Baja" required>
+        </div>
+
+        <div class="form-group">
+            <label>Mesin Produksi</label>
+            <select name="machine_id" required>
+                {% for machine in machines %}
+                <option value="{{ machine.id }}">
+                    {{ machine.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Target Produksi (unit)</label>
+            <input type="number" name="target" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label>Hasil Aktual (unit)</label>
+            <input type="number" name="actual" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label>Produk Cacat (unit)</label>
+            <input type="number" name="defects" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label>Waktu Produksi Terencana (jam)</label>
+            <input type="number" name="planned_time"
+                   min="0.1" step="0.1" required>
+        </div>
+
+        <div class="form-group">
+            <label>Waktu Berhenti Mesin (jam)</label>
+            <input type="number" name="downtime"
+                   min="0" step="0.1" value="0" required>
+        </div>
+
+        <div class="form-action">
+            <button type="submit" class="btn">Simpan Produksi</button>
+        </div>
+
+    </form>
+</section>
+
+<section class="panel">
+    <div class="panel-heading">
+        <div>
+            <h3>Riwayat Produksi</h3>
+            <p>Data hasil produksi yang sudah dicatat.</p>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Produk</th>
+                    <th>Mesin</th>
+                    <th>Target</th>
+                    <th>Aktual</th>
+                    <th>Cacat</th>
+                    <th>Downtime</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in production|reverse %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.product }}</td>
+                    <td>
+                        {{ machine_names.get(item.machine_id|string, "Tidak diketahui") }}
+                    </td>
+                    <td>{{ item.target }}</td>
+                    <td>{{ item.actual }}</td>
+                    <td>{{ item.defects }}</td>
+                    <td>{{ item.downtime }} jam</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">Belum ada data produksi.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
